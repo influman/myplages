@@ -1,0 +1,75 @@
+{
+	"plugin_id": "myplages",
+	"name_fr": "Mes plages horaires",
+	"icon": "plages.png",
+	"version": "1.1",
+	"creation_date": "2017-10-05",
+	"modification_date": "2018-01-13",
+	"author": "Influman & Merguez07",
+	"description_fr": "Permet de créer la plage horaire de son choix et de savoir dans vos règles si elle est en cours ou pas.<br>Pour un ou plusieurs jours donnés de la semaine, tous les jours, les jours impairs, etc.",
+	"description_en": "",
+	"description_es": "",
+	"description_it": "",
+	"description_de": "",
+	"forum_link": "http://forum.eedomus.com/viewtopic.php?f=15&t=5962#p55064",
+	"parameters":
+  	[
+  		{
+			"parameter": "JOUR", 
+			"description": "Jour(s) de la plage ",
+			"xtype": "combo",
+			"default_value": "Tous",
+			"field": "width:200, allowBlank:false, store:['Tous', 'Pairs', 'Impairs', 'Lun>>Ven', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim', 'Sam-Dim', 'Mar-Jeu', 'Mer-Ven'  ], editable: false, shadow: true, triggerAction: 'all', typeAhead:true"
+    	},
+		{
+			"parameter": "DEB", 
+			"description": "Heure de début",
+			"xtype": "textfield",
+      		"default_value": "14:30",
+			"field": "width:100, allowBlank:false"
+    	},
+   		{
+			"parameter": "FIN", 
+			"description": "Heure de fin",
+			"xtype": "textfield",
+      		"default_value": "17:30",
+			"field": "width:100, allowBlank:false"
+    	}
+ 	],
+	"scripts":
+	[
+		{
+			"name": "myplages.php"
+		}
+	],
+	"devices":
+  	[
+		{
+			"device_id": "plage",
+			"module_id": "51",
+			"type": "http",
+			"name_fr": "Plage plugin.parameters.DEB plugin.parameters.FIN (plugin.parameters.JOUR)",
+			"icon": "plages.png",
+			"utilisation_id": "35",
+			"parameters":
+			{
+				"VAR1": "plugin.parameters.JOUR",
+				"VAR2": "plugin.parameters.DEB",
+				"VAR3": "plugin.parameters.FIN",
+				"value_type": "list",
+				"ignore_errors": 3,
+				"RAW_URL": "http://localhost/script/?exec=myplages.php&jour=[VAR1]&deb=[VAR2]&fin=[VAR3]",
+				"RAW_XPATH": "/PLAGES/RESULTAT",
+				"POLLING": "1"
+			},
+			"values":
+			[
+				{ "value": 0, "description": "Hors plage", "icon": "plageko.png" },
+				{ "value": 1, "description": "En cours", "icon": "plageok.png" }
+			]
+		}
+  	]
+}
+
+
+
